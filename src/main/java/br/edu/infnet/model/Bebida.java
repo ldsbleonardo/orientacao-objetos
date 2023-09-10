@@ -1,5 +1,7 @@
 package br.edu.infnet.model;
 
+import exceptions.BebidaException;
+
 public class Bebida extends Produto {
 
 	private boolean gelada;
@@ -48,6 +50,22 @@ public class Bebida extends Produto {
 	@Override
 	public String tipo() {
 		return gelada ? "Bebida do Tipo Gelada" : "Bebida Quente (Destilada)";
+	}
+
+	public boolean validaTamanhoBebida() {
+		boolean valido = true;
+		try {
+			if (this.tamanho == null) {
+				throw new BebidaException(this.tamanho);
+			}
+
+		} catch (BebidaException e) {
+			System.out.println("Mensagem de negócio: " + e.getMessage());
+			e.printStackTrace();
+
+		}
+		return valido;
+
 	}
 
 }

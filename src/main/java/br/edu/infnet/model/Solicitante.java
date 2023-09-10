@@ -1,5 +1,7 @@
 package br.edu.infnet.model;
 
+import exceptions.SolicitanteException;
+
 public class Solicitante {
 
 	private String nome;
@@ -34,6 +36,20 @@ public class Solicitante {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public boolean validaNome() {
+		boolean valido = false;
+		try {
+			if (this.nome == null) {
+				throw new SolicitanteException(this.nome);
+			}
+			valido = true;
+		} catch (SolicitanteException e) {
+			e.printStackTrace();
+		}
+
+		return valido;
 	}
 
 }

@@ -1,23 +1,18 @@
 package exceptions;
 
-import java.math.BigDecimal;
-
 public class BebidaException extends Exception{
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-	protected BigDecimal peso;
+	protected float tamanho;
 	
-	public BebidaException(BigDecimal peso) {
+	public BebidaException(float tamanho) {
 		super();
-		this.peso=peso;
+		this.tamanho=tamanho;
 	}
 	
 	@Override
 	public String toString() {
-		return "Bebida não pode ser nulo!";
+		return "Tamanho da bebida deve ser preenchido!";
 	}
 
 }

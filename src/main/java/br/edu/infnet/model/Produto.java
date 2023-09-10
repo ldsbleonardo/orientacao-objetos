@@ -1,5 +1,7 @@
 package br.edu.infnet.model;
 
+import exceptions.ProdutoException;
+
 public abstract class Produto {
 
 	private String nome;
@@ -7,13 +9,14 @@ public abstract class Produto {
 	private Float valor;
 
 	private Integer codigo;
-
+	
 	public Produto(String nome, Float valor, Integer codigo) {
 		this.nome = nome;
 		this.valor = valor;
 		this.codigo = codigo;
 	}
 	
+
 	public abstract String tipo();
 
 	public String getNome() {
@@ -38,6 +41,19 @@ public abstract class Produto {
 
 	public void setCodigo(Integer codigo) {
 		this.codigo = codigo;
+	}
+
+	public boolean validaValorProduto() {
+		boolean valido = false;
+		try {
+			if (this.valor == null) {
+				throw new ProdutoException(this.valor);
+			}
+			valido = true;
+		} catch (ProdutoException e) {
+			e.printStackTrace();
+		}
+		return valido;
 	}
 
 }

@@ -1,5 +1,7 @@
 package br.edu.infnet.model;
 
+import exceptions.SobremesaException;
+
 public class Sobremesa extends Produto {
 
 	private Float quantidade;
@@ -49,6 +51,20 @@ public class Sobremesa extends Produto {
 	@Override
 	public String tipo() {
 		return doce ? "Tipo de Sobremesa - Doce" : "Tipo de Sombremesa -Salgada";
+	}
+
+	public boolean validaQuantidade() {
+		boolean valido = false;
+		try {
+			if (this.quantidade == null) {
+				throw new SobremesaException(this.quantidade);
+			}
+			valido = true;
+		} catch (SobremesaException e) {
+			e.printStackTrace();
+		}
+
+		return valido;
 	}
 
 }

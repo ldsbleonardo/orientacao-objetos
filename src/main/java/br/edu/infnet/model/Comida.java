@@ -1,5 +1,7 @@
 package br.edu.infnet.model;
 
+import exceptions.ComidaException;
+
 public class Comida extends Produto {
 
 	private Float peso;
@@ -17,8 +19,7 @@ public class Comida extends Produto {
 	public String toString() {
 		return "Comida [peso=" + peso + ", vegano=" + vegano + ", ingredientes=" + ingredientes + ", getPeso()="
 				+ getPeso() + ", isVegano()=" + isVegano() + ", getIngredientes()=" + getIngredientes() + ", getNome()="
-				+ getNome() + ", getValor()=" + getValor() + ", getCodigo()=" + getCodigo() + ", getClass()="
-				+ getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
+				+ getNome() + ", getValor()=" + getValor() + ", getCodigo()=" + getCodigo() + "]";
 	}
 
 	public float getPeso() {
@@ -48,6 +49,21 @@ public class Comida extends Produto {
 	@Override
 	public String tipo() {
 		return vegano ? "Comida Vegana" : "Tradicional";
+	}
+
+	public boolean validaPesoComida() {
+		boolean valido = true;
+		try {
+			if (this.peso == null) {
+				throw new ComidaException(this.peso);
+			}
+		} catch (ComidaException e) {
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+			valido = false;
+		}
+		return valido;
+
 	}
 
 }

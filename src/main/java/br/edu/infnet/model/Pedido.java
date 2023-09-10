@@ -1,18 +1,26 @@
 package br.edu.infnet.model;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+import exceptions.PedidoException;
 
 public class Pedido {
-	
+
+	private String descricao;
+	private LocalDateTime data;
+	private boolean web;
+
+	private String pedidoWeb[];
+
+	private List<Pedido> list = new ArrayList<Pedido>();
+
 	public Pedido(String descricao, LocalDateTime data, boolean web) {
 		this.descricao = descricao;
 		this.data = data;
 		this.web = web;
 	}
-
-	private String descricao;
-	private LocalDateTime data;
-	private boolean web;
 
 	public String getDescricao() {
 		return descricao;
@@ -37,12 +45,37 @@ public class Pedido {
 	public void setWeb(boolean web) {
 		this.web = web;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Pedido [descricao=" + descricao + ", data=" + data + ", web=" + web + ", getDescricao()="
-				+ getDescricao() + ", getData()=" + getData() + ", isWeb()=" + isWeb() + ", getClass()=" + getClass()
-				+ ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
+				+ getDescricao() + ", getData()=" + getData() + ", isWeb()=" + isWeb() + "]";
+	}
+
+	public boolean validaDescricaoPedido() {
+		boolean valido = false;
+		try {
+			if (this.descricao == null) {
+				throw new PedidoException(this.descricao);
+			}
+			valido = true;
+		} catch (PedidoException e) {
+			e.printStackTrace();
+		}
+		return valido;
+
+	}
+
+	public String[] getPedidoWeb() {
+		return pedidoWeb;
+	}
+
+	public void setPedidoWeb(String pedidoWeb[]) {
+		this.pedidoWeb = pedidoWeb;
+	}
+
+	public int totalPedidosWeb() {
+		return pedidoWeb == null ? 0 : (int) list.stream().count();
 	}
 
 }
